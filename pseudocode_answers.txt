@@ -1,0 +1,56 @@
+Short Answer 
+1. Why do programmers use pseudocode?
+	To organize and set up the logic without getting distracted about remembering and 	following all the syntax correctly.
+2. If you run pseudocode on your computer what would happen?
+	Since pseudocode is to be read by humans, computers cannot process it. 
+
+Programming Assignment 
+Write the following algorithms in pseudocode:
+
+1. Create a function that takes two numbers and prints out the greater number.
+	function a, b 
+	if a is greater than or equal to b ? 
+	  return a 
+	else 
+	  return b	
+
+2. Create a function that prints out the numbers from 1 to 100.
+	create a variable that is 0
+	for loop 
+	  i starts at 1 till 100, i increments 
+	  the variable equals and adds i 
+	  return a 	
+
+3. Create a function that searches for a specific entry in a phonebook.
+	(assuming the phonebook is an array that has a collection of objects with 2 properties: full name and phone number in full name's alphabetically order) 
+	create a variable that is array
+	create a variable that is the specific entry
+	function
+	    iterate through the phonebook array with filter method 
+	    create a variable that equals to the object whose full name is identical with the specific entry 
+	    return the variable 	
+
+4. Using the pseudocode you wrote for the previous question, implement it in any computer language of your choice.
+
+---------------------------
+	function(a, b){
+    	  (a >=b) ? a : b
+	}
+
+---------------------------
+	var a = 0;
+  	for(let i=0; i<=100; i++){
+    	  a += i;
+     	  console.log(a);
+  	}
+---------------------------
+	var phonebook = []
+	var query = ""
+	function(query, phonebook){
+  	  let result = phonebook.filter(a => a.fullname == query)
+  	  return result
+	}
+
+	
+	
+	

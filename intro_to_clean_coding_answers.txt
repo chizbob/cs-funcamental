@@ -18,22 +18,19 @@ FUNCTION do(x, y)               // Creating a new function
  END IF
 END FUNCTION
 
-3A: I think comment is better located before the code starts instead of being on the right. Also you don't need to comment about every single line you write. Only when necessary to help anyone understand what you are trying to achieve. I'd refactor as below:
+3A: I think comment is better located before the code starts instead of being on the right. Also you don't need to comment about every single line you write. Only when necessary to help anyone understand what you are trying to achieve. 
+Plus, the argument names as well as function names are not clear to understand what they are meant. I'd refactor as below:
 
 //Convert degrees F to C 
-FUNCTION do(x, y)
-  IF y = "F" THEN 
-    SET z to (x−32) * (5/9)
-    PRINT z
+Function to get celicious (fahrenheit) 
+    variable celcious equals to (fahrenheit−32) * (5/9)
+    Return celcious 
 
 //Convert degrees C to F
-  ELSE IF y = "C" THEN
-    SET z to x * 1.8000 + 32.00
-    PRINT z
+Function to get fahrenheit (celicious)
+    Variable fahrenheit equals to celcious x * 1.8000 + 32.00
+    Return fahrenheit
   
-  END IF
-END FUNCTION
-
 4. Would you consider the following to be clean code? Explain why or why not. If not, refactor the code.
 
 FUNCTION calcPercent(sum, total)
@@ -69,14 +66,12 @@ END FUNCTION
 
   5aA: I'd separate the total price part from payment type part. It would look something like this: 
 
-//calculate total price
-function to create total price (subtotal, discountrate, taxrate)
-  variable named total price 
-  total price equals (subttoal * (1-discountrate)) * (1-taxrate) 
-  return total price 
-
-//another function to adjust total price according to the payment method 
-if cash ? (cash formula) : (credit card formula)
+//calculate total price and return corresponding messages 
+global variable named discount rate = XX 
+Global variable named tax rate = xx
+function to create total price (subtotal, amountGiven, payment type)
+  variable named total price equals to (subtotal * (1-discountrate)) * (1-taxrate) 
+  If payment type is cash? "Your total is (amountGiven - total price)" : "your credit card has been charged total price"
 
   b. The following function checks out a book if there are no issues with the guest's account.
 
@@ -97,11 +92,11 @@ END FUNCTION
 5bA: Since the nesting is too deep, I would make that simple, and adjust the logic as below: 
 
 Function to handle checkout (guest, bookTitle)
-  if guest.hasOverdue is true? 
-    return "unable to checkout. please resolve fees first"
-  else 
-    append book to guest.books
-    return "bookTitle has been issued"
+  if guest.isActive && !hasOverdue && outstandingFee = 0? 
+    Append bookTitle to guest.books
+    Return "bookTitle has been issued"
+  else
+    return "unable to checkout books"
 
 c. The following class is a code snippet that should support the transactions a customer can perform at an ATM.
 
@@ -145,7 +140,7 @@ function to display balance
   return current balance
 
 function to handle deposit (amount)
-  variable new balance equals current balance + deposit 
+  variable new balance equals to current balance + deposit 
   Set new balance to currentBalance
   return current balance
 
@@ -171,14 +166,33 @@ You may do the following problems in any language of your choice. Use the clean 
 6. Square 
 Given an array of integers, find out whether the sum of the integers is a perfect square. If it is a perfect square, return the square root, otherwise return the sum.
 
+Pseudo code)
 function to return square root or sum (array)
   variable sum is array.reduce(sum calculate method)
   variable squareRoot is squareRoot of sum 
   isInteger(squareRoot) ? squareRoot : sum 
 
+Actual code)
+function findSqrtSum(arr){
+  const sum = arr.reduce((a, b) => a + b)
+  const sqrt = Math.sqrt(sum)
+  if (Number.isInteger(sqrt)) {
+    return sqrt
+  } else {
+    return sum
+  }
+}
+
 7. Duplicate 
 Given an array of integers, find out whether the array contains any duplicate elements. The function should return true if any value appears at least twice in the array, and false if every element is distinct.
 
+Pseudo code) 
 function to find duplicate (array)
    variable results = array.filter(find only distinct)
    array.length == results.length ? false : true 
+
+Actual code)
+function findDuplicate(arr){
+   const result = arr.filter((value, index, array) => array.lastIndexOf(value) == index)
+   arr.length == result.length ? console.log(false) : console.log(true)
+}

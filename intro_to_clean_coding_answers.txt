@@ -1,19 +1,19 @@
 Exercise
 
 1. In your own words, explain what clean code is and why it is important.
-1A: Clean code allows you to maintain and fix bugs easily, and makes it easy to work with other developers as well. 
+1A: Clean code allows you to maintain the code and fix bugs easily, and makes it easy to work with other developers as well. 
 
-2. 
-2A: 
+2. Read this article about Toyota and their use of bad code. Although you may not yet understand all of the topics discussed, think about another commonly used object that relies on computers and explain what would happen if the code was not created to an acceptable standard.
+2A: Any code that are used in hospital can be critical to patients' health, even fatal. For example, think about the blood supply system for patients who need a certain type of blood at a specific amount. If the code is not up to standard, the consequences can be disastrous.  
 
 3. Would you consider the following to be clean code? Explain why or why not. If not, refactor the code.
 
 FUNCTION do(x, y)               // Creating a new function
  IF y = "F" THEN               // Check if y is equal "F"
- SET z to (x−32) * (5/9)       // Formula to convert degrees fahrenheit to celsius
+ SET z to (x−32) * (5/9)       // Formula to convert degrees Fahrenheit to celsius
  PRINT z                       // Print result
  ELSE IF y = "C" THEN          // If y not equal to "F", check if equal to "C"
- SET z to x * 1.8000 + 32.00   // Formula to convert degrees celsius to fahrenheit
+ SET z to x * 1.8000 + 32.00   // Formula to convert degrees celsius to Fahrenheit
  PRINT z                       // Print result
  END IF
 END FUNCTION
@@ -46,11 +46,10 @@ FUNCTION calcPercent(sum, total)
  PRINT percentage
 END FUNCTION
 
-4A: I would name the arguments "sum" and "total" more specific, in order to give clear ideas what they are. Right now, why the difference between the two is not clear. Also I'd do the "pre-screening" first. My refactor would look like: 
+4A: I'd rather do the screening first. Also, I would name the arguments "sum" and "total" more specific, in order to give clear ideas what they are. Right now, why the difference between the two is not clear. My refactor would look like: 
 
-create function calcPercent with arguments item and total
-  if total is 0, return "sorry cannot divide by 0"
-    else return item/total * 100
+function to calculate percent (item, total)
+  if total is 0 ? "sorry cannot divide by 0" : item/total * 100
 
 5. Using pseudocode, refactor the code for the following examples using the principles you have learned in this checkpoint.
 
@@ -70,14 +69,14 @@ END FUNCTION
 
   5aA: I'd separate the total price part from payment type part. It would look something like this: 
 
-//calculate total price 
-function takes in subtotal, discountrate, taxrate
-create a variable to capture total price 
+//calculate total price
+function to create total price (subtotal, discountrate, taxrate)
+  variable named total price 
   total price equals (subttoal * (1-discountrate)) * (1-taxrate) 
-  return the total price 
+  return total price 
 
 //another function to adjust total price according to the payment method 
-if cash ? (cash formula) : (creditcard formula)
+if cash ? (cash formula) : (credit card formula)
 
   b. The following function checks out a book if there are no issues with the guest's account.
 
@@ -97,7 +96,7 @@ END FUNCTION
 
 5bA: Since the nesting is too deep, I would make that simple, and adjust the logic as below: 
 
-create function taking in guest, bookTitle
+Function to handle checkout (guest, bookTitle)
   if guest.hasOverdue is true? 
     return "unable to checkout. please resolve fees first"
   else 
@@ -146,15 +145,17 @@ function to display balance
   return current balance
 
 function to handle deposit (amount)
-  variable newBalance equals current balance + deposit 
-  return newBalance
+  variable new balance equals current balance + deposit 
+  Set new balance to currentBalance
+  return current balance
 
 function to handle withdraw (amount)
-  variable newBalance equals current balance - deposit 
+  variable new balance equals current balance - deposit 
   if newBalance is less than 0? 
     return "can't process withdraw"
   else
-    return newBalance
+    Set new balance to current balance
+    return current balance
  
 function to offer credit card 
   if !hasCreditCard
@@ -171,8 +172,8 @@ You may do the following problems in any language of your choice. Use the clean 
 Given an array of integers, find out whether the sum of the integers is a perfect square. If it is a perfect square, return the square root, otherwise return the sum.
 
 function to return square root or sum (array)
-  var sum = array.reduce(sum)
-  var squareRoot = squareRoot of sum 
+  variable sum is array.reduce(sum calculate method)
+  variable squareRoot is squareRoot of sum 
   isInteger(squareRoot) ? squareRoot : sum 
 
 7. Duplicate 

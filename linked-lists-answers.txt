@@ -1,0 +1,100 @@
+Exercise
+1. What are some pros and cons of using linked lists instead of arrays?
+The node, which makes up every linked list, is independent in memory, which means it will be assigned to any available space/location to be stored. This is a huge advantage because in array, the elements should be consecutively located creating a memory burden. 
+However, this may make it hard and inefficient to find the node, since its location is not predictable. 
+
+2. Come up with a real world example of a linked list.
+Me and my friends went to a park for BBQ, and I picked up a wallet from the grass. Since I feel obligated to find the owner of the wallet, I go around the tables in the BBQ area and ask the people around each table if this wallet belongs to anyone of them. If they shake their heads, I move on to another table and so on until someone says yes or the tables run out.
+
+OR 
+
+My friend likes a game called the "chained note". The purpose of this game is basically to give you a prize. But for that, you need to do some work. The game goes like this:
+She hid many notes and a prize in different areas of the house. 
+The first note usually starts on the dining table and gives out a clue about what the prize is and the place to find the next note. 
+I should to go to the place that was referenced to on the first note. 
+When I go there, I see another note and clue.
+As I repeat this process I get better ideas on what's waiting for me. 
+Continue on until I get to the final destination and claim the gift, which means the end of the tame.
+Of course, the repetition depends on how many notes she left.
+
+Programming Questions
+1. The linked list push function should take a value, create a node, and add it to the end of a list. Below is pseudocode for a push function for a singly linked list. However, there is something wrong with it. Submit both an explanation of the bug and a functional implementation of the method.
+
+FUNCTION push(element)
+CREATE node
+SET node.value TO element
+SET node.next TO null
+
+IF the head node does not exist
+ THEN SET head to node
+ELSE
+ SET current to head
+ SET current.next to node
+END IF
+END FUNCTION
+
+
+My correction would look like: 
+
+2. Given an unsorted singly linked list, remove all duplicates from the linked list.
+Example
+Input: a -> c -> d -> d -> a
+Output: a -> c -> d
+
+A: 
+
+class LinkedList {
+  constructor() {
+    this.head = null
+  }
+
+  insertNodeAtTail(val) {
+    var node = {
+      data: val,
+      next: null
+    }
+    if (!this.head) {
+      this.head = node
+    } else {
+      var p1 = this.head
+      while (p1.next) {
+        p1 = p1.next
+      }
+      p1.next = node
+    }
+  }
+
+  deleteNode(val) {
+     if (!this.head) {
+      console.log('Linked list is empty.')
+      return
+    }
+    if (this.head.data === val) {
+      this.head = this.head.next
+    } else {
+      var p1 = this.head
+      var p2 = p1.next
+      while (p2) {
+        if (p2.data === val) {
+          p1.next = p2.next
+          break
+        } else {
+          p1 = p2
+        }
+        p2 = p2.next
+      }
+    }
+  }
+}
+
+3. Given an unsorted singly linked list, reverse it.
+Example
+Input: a -> b -> c -> d
+Output: d -> c -> b -> a
+
+while(currNode!=null){
+     nextNode = currNode.next;
+     currNode.next = prevNode;
+     prevNode = currNode;
+     currNode = nextNode;
+}

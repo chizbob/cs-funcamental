@@ -18,8 +18,16 @@ alert(i);
 They both allow for access to any of the elements in them at a certain order. 
 
 3. Imagine you are an engineer tasked with implementing the UNDO and REDO options in a word processor such as Microsoft Word. Which data structure would you use for each option and why?
-Undo: LIFO, hence stack, because it removes the latest action you took 
-Redo: FIFO, hence queue, because the action is taken upon the first element from the queue
+
+First of all, what is undo and redo?
+Undo: to cancel the latest action taken
+Redo: to repeat the latest action taken 
+
+You need to keep the command in a stack for Undo, as well as another empty stack for Redo.  When you pop -because it is the latest action- the undo stack, also you push the same command into the redo stack. So for Undo, it is popped from the stack (last in fist out), and for Redo, the command is pushed to the stack (first in first out). You pop the redo stack and push the popped command back into the undo stack.
+
+
+
+Create an object that store some latest actions taken as well as an empty object for Redo. To implement Undo, you pop the latest element from the stack, and, at the same time, push the same command into the Redo stack.  
 
 Programming Questions
 1. Given a string, reverse it using a stack. For example, the string "Bloc!" should be converted to "!colB".

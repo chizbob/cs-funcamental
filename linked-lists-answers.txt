@@ -1,13 +1,9 @@
 Exercise
 1. What are some pros and cons of using linked lists instead of arrays?
-The node, which makes up every linked list, is independent in memory, which means it will be assigned to any available space/location to be stored. This is a huge advantage because in array, the elements should be consecutively located creating a memory burden. 
+The node, which makes up every linked list, is independent in memory, which means it will be assigned to any available space/location to be stored. This is a huge advantage because in array, the elements should be consecutively located, creating a memory burden. 
 However, this may make it hard and inefficient to find the node, since its location is not predictable. 
 
 2. Come up with a real world example of a linked list.
-Me and my friends went to a park for BBQ, and I picked up a wallet from the grass. Since I feel obligated to find the owner of the wallet, I go around the tables in the BBQ area and ask the people around each table if this wallet belongs to anyone of them. If they shake their heads, I move on to another table and so on until someone says yes or the tables run out.
-
-OR 
-
 My friend likes a game called the "chained note". The purpose of this game is basically to give you a prize. But for that, you need to do some work. The game goes like this:
 She hid many notes and a prize in different areas of the house. 
 The first note usually starts on the dining table and gives out a clue about what the prize is and the place to find the next note. 
@@ -33,8 +29,23 @@ ELSE
 END IF
 END FUNCTION
 
+The problem of the code above is:
+Since this function is supposed to add the value to the end of the list, it should not be set to head. 
+And what the variable current means is not clear. Does this refer to the tail node? 
 
 My correction would look like: 
+ 
+function to create push method (element)
+  create node                      //create a node with this element
+  set node.value to element
+  set node.next to null            //since this node is going to be located at the last
+
+  if there is no head (and tail)
+    set head to node
+    set tail to node
+  else 
+    set tail.next to node          //to add the value to the end of the list
+    set tail to node               //to update the tail 
 
 2. Given an unsorted singly linked list, remove all duplicates from the linked list.
 Example
@@ -43,58 +54,8 @@ Output: a -> c -> d
 
 A: 
 
-class LinkedList {
-  constructor() {
-    this.head = null
-  }
-
-  insertNodeAtTail(val) {
-    var node = {
-      data: val,
-      next: null
-    }
-    if (!this.head) {
-      this.head = node
-    } else {
-      var p1 = this.head
-      while (p1.next) {
-        p1 = p1.next
-      }
-      p1.next = node
-    }
-  }
-
-  deleteNode(val) {
-     if (!this.head) {
-      console.log('Linked list is empty.')
-      return
-    }
-    if (this.head.data === val) {
-      this.head = this.head.next
-    } else {
-      var p1 = this.head
-      var p2 = p1.next
-      while (p2) {
-        if (p2.data === val) {
-          p1.next = p2.next
-          break
-        } else {
-          p1 = p2
-        }
-        p2 = p2.next
-      }
-    }
-  }
-}
-
 3. Given an unsorted singly linked list, reverse it.
 Example
 Input: a -> b -> c -> d
 Output: d -> c -> b -> a
 
-while(currNode!=null){
-     nextNode = currNode.next;
-     currNode.next = prevNode;
-     prevNode = currNode;
-     currNode = nextNode;
-}

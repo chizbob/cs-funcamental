@@ -25,10 +25,6 @@ Redo: to repeat the latest action taken
 
 You need to keep the command in a stack for Undo, as well as another empty stack for Redo.  When you pop -because it is the latest action- the undo stack, also you push the same command into the redo stack. So for Undo, it is popped from the stack (last in fist out), and for Redo, the command is pushed to the stack (first in first out). You pop the redo stack and push the popped command back into the undo stack.
 
-
-
-Create an object that store some latest actions taken as well as an empty object for Redo. To implement Undo, you pop the latest element from the stack, and, at the same time, push the same command into the Redo stack.  
-
 Programming Questions
 1. Given a string, reverse it using a stack. For example, the string "Bloc!" should be converted to "!colB".
 Pseudo code)
@@ -50,26 +46,27 @@ function reverseString(string){
 }
 
 2. Implement the pop method of a stack using one queue. Make a FIFO data structure mirror the functionality of a LIFO data structure. Since the internal list is not the same as defined in the checkpoint, it may help to rewrite the pseudocode first.
-Pseudo code)
 
-Class queue {
- Constructor {}
- Pop method {}
-}
+Pseudo code)
+Class queue
+  Constructor
+  Dequeue to return the popped queue 
+  Enqueue to push element to the end 
 
 Actual code)
 class Queue{
   constructor(){
     this.data=[]
   }
-  pop(array){
-    for(let i = 0 ; i <= array.length-1 ; i++){
-      let newArray = array.push(this.data[i])
-    }
-    return newArray
-  }
+  
+  dequeue(el)
+    val temp = this.data[queue.length]
+    this.data.pop
+    return temp
+  
+  enqueue(el)
+    this.data.push(el)    
 }
-
 
 3. Implement the enqueue and dequeue methods defined in the checkpoint inside your own Queue class.
 class Queue{

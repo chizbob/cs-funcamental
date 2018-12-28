@@ -52,10 +52,76 @@ Example
 Input: a -> c -> d -> d -> a
 Output: a -> c -> d
 
-A: 
+Pseudo code)
+Class node 
+  Constructor to assig node
+  Function to remove duplicates
+     in case of no head - terminate 
+  If there's next, head equals to next 
+  Else nodes data is true
+    Head equals next   
+
+class Node{
+  constructor(el){
+    this.value = el
+    this.next = null
+  }
+  
+  removeDupes(){
+    if (!this.head || !this.head.next){
+      return
+    }
+    var p1
+    var p2
+    var node = {}
+
+    p1 = this.head
+    p2 = this.next
+    nodes[p1.data] = true
+
+    while(p2){
+      var data = p2.data
+      if(nodes[data]){
+        p1.next = p2.next
+      } else {
+        nodes[data] = true
+        p1 = p2
+      }
+      p2 = p2.next
+    }
+  }
+}
 
 3. Given an unsorted singly linked list, reverse it.
 Example
 Input: a -> b -> c -> d
 Output: d -> c -> b -> a
 
+Pseudo)
+Function to reverse node
+  Set current to head
+  while there is current node 
+    Set next to current's next 
+    Set current'next to previous
+    Set previous to current 
+    Set current to next  
+
+Actual code)
+class LinkedList {
+  constructor() {
+    this.head = null;
+    this.length = 0;
+  }
+  
+  reverse(){
+    var current = this.head,
+    var previous = null
+    while(current){
+      var next = current.next
+      current.next = previous
+      previous = current;
+      current = next;
+    }
+    return previous;
+  }
+}

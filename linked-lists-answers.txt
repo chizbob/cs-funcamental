@@ -92,6 +92,9 @@ class Node{
   }
 }
 
+* test data: 
+var test = [1,2,3,4,5,5]
+
 3. Given an unsorted singly linked list, reverse it.
 Example
 Input: a -> b -> c -> d
@@ -109,8 +112,8 @@ Function to reverse node
 Actual code)
 class LinkedList {
   constructor() {
-    this.head = null;
-    this.length = 0;
+    this.head = null
+    this.length = 0
   }
   
   reverse(){
@@ -119,9 +122,12 @@ class LinkedList {
     while(current){
       var next = current.next
       current.next = previous
-      previous = current;
-      current = next;
+      previous = current
+      current = next
     }
-    return previous;
+    return previous
   }
 }
+
+* test data 
+var test  = [1,2,3,4,5]

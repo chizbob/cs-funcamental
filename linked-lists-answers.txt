@@ -61,39 +61,94 @@ Class node
   Else nodes data is true
     Head equals next   
 
-class Node{
-  constructor(el){
-    this.value = el
-    this.next = null
+
+Actual code)
+function Node(el){
+  this.el = el
+  this.next = null
+}
+
+class LinkedList {
+  constructor() {
+    this.head = null
+    this.tail = null
+  }
+
+  push(element){
+    var node = new Node(element)
+    if(!this.head){
+      this.head = node
+      this.tail = node
+    } else {
+      this.tail.next = node
+      this.tail = node
+    }
+   
   }
   
-  removeDupes(){
-    if (!this.head || !this.head.next){
-      return
-    }
-    var p1
-    var p2
-    var node = {}
-
-    p1 = this.head
-    p2 = this.next
-    nodes[p1.data] = true
-
-    while(p2){
-      var data = p2.data
-      if(nodes[data]){
-        p1.next = p2.next
-      } else {
-        nodes[data] = true
-        p1 = p2
+  //   Function named deDup
+//   pick element one by one
+//   compare the picked element with rest elements
+//   if duplicates, delete it. how? 
+//         picked.el == current.el ? previous.next = current.next, current=current.next 
+//         : previous = current, current = current.next
+  
+  deDup(){
+    var picked = this.head
+    while (picked) {
+    
+      var current = picked.next
+      var previous = picked
+      while (current) {
+        
+        if(picked.el == current.el){
+          previous.next = current.next
+          current = current.next
+        } else {
+          previous = current
+          current = current.next
+        }
       }
-      p2 = p2.next
+      this.tail = picked
+      picked = picked.next
+    } 
+  }
+
+  reverse(){
+    var current = this.head
+    var previous = null
+    while(current){
+      var next = current.next
+      current.next = previous
+      previous = current
+      current = next
+    }
+    var oldHead = this.head
+    this.head = this.tail
+    this.tail = oldHead
+  }
+  
+  print() {
+    var current = this.head
+    while(current) {
+      console.log(current.el)
+      current = current.next
     }
   }
 }
 
-* test data: 
-var test = [1,2,3,4,5,5]
+var test = ["a", "b", "a", "d", "c", "d", "a", "d", "c", "d", "d", "d"]
+var linkedlist = new LinkedList
+
+for(let i=0; i<test.length; i++){
+  linkedlist.push(test[i])
+  linkedlist.print()
+  console.log("----------")
+}
+
+linkedlist.deDup()
+linkedlist.print()
+
 
 3. Given an unsorted singly linked list, reverse it.
 Example
@@ -110,14 +165,32 @@ Function to reverse node
     Set current to next  
 
 Actual code)
+//create a node
+function Node(el){
+  this.el = el
+  this.next = null
+}
+
 class LinkedList {
   constructor() {
     this.head = null
-    this.length = 0
+    this.tail = null
+  }
+
+  push(element){
+    var node = new Node(element)
+    if(!this.head){
+      this.head = node
+      this.tail = node
+    } else {
+      this.tail.next = node
+      this.tail = node
+    }
+   
   }
   
   reverse(){
-    var current = this.head,
+    var current = this.head
     var previous = null
     while(current){
       var next = current.next
@@ -125,9 +198,28 @@ class LinkedList {
       previous = current
       current = next
     }
-    return previous
+    var oldHead = this.head
+    this.head = this.tail
+    this.tail = oldHead
+  }
+  
+  print() {
+    var current = this.head
+    while(current) {
+      console.log(current.el)
+      current = current.next
+    }
   }
 }
 
-* test data 
-var test  = [1,2,3,4,5]
+var test = ["a", "b", "c", "d"]
+var linkedlist = new LinkedList
+
+for(let i=0; i<test.length; i++){
+  linkedlist.push(test[i])
+  linkedlist.print()
+  console.log("----------")
+}
+
+linkedlist.reverse()
+linkedlist.print()

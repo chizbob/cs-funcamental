@@ -26,6 +26,47 @@ A: The key here is whether the data can be associated based on a certain categor
 
 6. Build a system that allows a sales associate to enter a customer's name, address, and phone number into the system and look up customers using their phone numbers. Store this information in a hash table.
 
+class CustomerDB{
+  constructor(){
+    this.db = []
+  }
+
+  hash(phone){
+    let result = 0
+       for(let i=0; i<phone.length; i++){
+         result += phone.charCodeAt(i)
+       }
+    return result % 100
+  }
+  
+  addCustomer(info){
+      let index = this.hash(info.phone)
+      if(this.db[index] === undefined){
+        this.db[index] = [info]
+      } else {
+        while(this.db[index] !==undefined){
+          this.db[index].push(info)
+        }
+      }
+      console.log(this.db)
+  }
+  
+  lookup(phone){
+    let index = this.hash(phone)
+    return this.db[index]
+  } 
+}
+
+let print = new CustomerDB()
+
+console.log(print.addCustomer({name: "St.Bae", phone:"78798799", address: "1 dog lane"}))
+console.log(print.addCustomer({name: "Soo", phone: "9668103", address: "2 cat way"}))
+// console.log(print.addCustomer({name: "Yubin", phone: "4297654", address: "3 pineApple dr"}))
+// console.log(print.addCustomer({name: "Chung", phone: "5768790", address: "55 circle cir."}))
+// console.log(print.lookup({name: "soo", phone: "9668103"}))
+console.log(print.lookup("9668103"))
+
 7. Build a system that allows a store owner to track their store's inventory using a hash table for storage.
+
 
 8. Build a system that allows digital copies of newspapers to be entered and searched by publisher and publication date. Use hash tables to store the necessary data.

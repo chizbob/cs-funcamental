@@ -68,5 +68,82 @@ console.log(print.lookup("9668103"))
 
 7. Build a system that allows a store owner to track their store's inventory using a hash table for storage.
 
+class Inventory{
+  constructor(){
+    this.db = []
+  }
+
+  hash(productName){
+    let result = 0
+       for(let i=0; i<productName.length; i++){
+         result += productName.charCodeAt(i)
+       }
+    return result % 100
+  }
+  
+  addInventory(info){
+      let index = this.hash(info.productName)
+      if(this.db[index] === undefined){
+        this.db[index] = [info]
+      } else {
+        while(this.db[index] !==undefined){
+          this.db[index].push(info)
+        }
+      }
+      console.log(this.db)
+  }
+  
+  lookup(productName){
+    let index = this.hash(phone)
+    return this.db[index]
+  } 
+}
+
+let print = new Inventory()
+
+console.log(print.addInventory({name: "Shampoo", manufacturer: "Soft.Inc", quantity: 50}))
+console.log(print.addInventory({name: "Conditioner", manufacturer: "Soft.Inc", quantity: 30}))
+console.log(print.addInventory({name: "Makeup Set", manufacturer: "Beutify & Co.", quantity: 10}))
+console.log(print.addInventory({name: "Makeup Set", manufacturer: "Beutify & Co.", quantity: 10}))
+console.log(print.lookup("Shampoo"))
+
 
 8. Build a system that allows digital copies of newspapers to be entered and searched by publisher and publication date. Use hash tables to store the necessary data.
+
+class DigitalNews{
+  constructor(){
+    this.db = []
+  }
+
+  hash(publisher){
+    let result = 0
+       for(let i=0; i<publisher.length; i++){
+         result += publisher.charCodeAt(i)
+       }
+    return result % 100
+  }
+  
+  addNews(newsInfo){
+      let index = this.hash(newsInfo.publisher)
+      if(this.db[index] === undefined){
+        this.db[index] = [newsInfo]
+      } else {
+        while(this.db[index] !==undefined){
+          this.db[index].push(newsInfo)
+        }
+      }
+      console.log(this.db)
+  }
+  
+  lookup(publisher, publishedDate){
+    let index = this.hash(publisher)
+    this.db[index].publishedDate === publishedDate ? this.db[index] : "no results found"
+  } 
+}
+
+let print = new DigitalNews()
+
+console.log(print.addNews({publisher: "NBC", publishedDate: "12/5/18", headline: "Christmas is Coming"}))
+console.log(print.addNews({publisher: "Washington Post", publishedDate: "12/12/17", headline: "New Year's Resolutions"}))
+console.log(print.lookup("NBC", "12/5/18"))
+

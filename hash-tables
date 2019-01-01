@@ -137,7 +137,7 @@ class DigitalNews{
   
   lookup(publisher, publishedDate){
     let index = this.hash(publisher)
-    this.db[index].publishedDate === publishedDate ? this.db[index] : "no results found"
+    this.db[index].filter(a => a.publishedDate === publishedDate)
   } 
 }
 
@@ -146,4 +146,3 @@ let print = new DigitalNews()
 console.log(print.addNews({publisher: "NBC", publishedDate: "12/5/18", headline: "Christmas is Coming"}))
 console.log(print.addNews({publisher: "Washington Post", publishedDate: "12/12/17", headline: "New Year's Resolutions"}))
 console.log(print.lookup("NBC", "12/5/18"))
-

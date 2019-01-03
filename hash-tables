@@ -68,6 +68,38 @@ console.log(print.lookup("9668103"))
 
 7. Build a system that allows a store owner to track their store's inventory using a hash table for storage.
 
+class Inventory{
+  constructor(){
+    this.db = []
+  }
+
+  hash(productName){
+    let result = 0
+       for(let i=0; i<productName.length; i++){
+         result += productName.charCodeAt(i)
+       }
+    return result % 100
+  }
+
+  addInventory(info){
+      let index = this.hash(info.productName)
+      this.db[index] === undefined ? this.db[index] = [info] : this.db[index].push(info)
+      //console.log(this.db[index])
+  }
+
+  lookup(productName){
+    let index = this.hash(productName)
+    return this.db[index].filter(a => a.productName === productName)
+  } 
+}
+
+let print = new Inventory()
+
+print.addInventory({productName: "Shampoo", manufacturer: "Soft.Inc", quantity: 50})
+// print.addInventory({productName: "Conditioner", manufacturer: "Soft.Inc", quantity: 30})
+// print.addInventory({productName: "Makeup Set", manufacturer: "Beutify & Co.", quantity: 10})
+console.log(print.lookup("Shampoo"))
+
 8. Build a system that allows digital copies of newspapers to be entered and searched by publisher and publication date. Use hash tables to store the necessary data.
 
 class DigitalNews{

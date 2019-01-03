@@ -41,14 +41,7 @@ class CustomerDB{
   
   addCustomer(info){
       let index = this.hash(info.phone)
-      if(this.db[index] === undefined){
-        this.db[index] = [info]
-      } else {
-        while(this.db[index] !==undefined){
-          this.db[index].push(info)
-        }
-      }
-      console.log(this.db)
+      this.db[index] === undefined ? this.db[index] = [info] :  this.db[index].push(info)
   }
   
   lookup(phone){

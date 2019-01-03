@@ -117,24 +117,17 @@ class DigitalNews{
   
   addNews(newsInfo){
       let index = this.hash(newsInfo.publisher)
-      if(this.db[index] === undefined){
-        this.db[index] = [newsInfo]
-      } else {
-        while(this.db[index] !==undefined){
-          this.db[index].push(newsInfo)
-        }
-      }
-      console.log(this.db)
+      this.db[index] === undefined ? this.db[index] = [newsInfo] : this.db[index].push(newsInfo)
   }
   
   lookup(publisher, publishedDate){
     let index = this.hash(publisher)
-    this.db[index].filter(a => a.publishedDate === publishedDate)
+    return this.db[index].filter(a => a.publishedDate === publishedDate)
   } 
 }
 
 let print = new DigitalNews()
 
-console.log(print.addNews({publisher: "NBC", publishedDate: "12/5/18", headline: "Christmas is Coming"}))
-console.log(print.addNews({publisher: "Washington Post", publishedDate: "12/12/17", headline: "New Year's Resolutions"}))
+print.addNews({publisher: "NBC", publishedDate: "12/5/18", headline: "Christmas is Coming"})
+print.addNews({publisher: "Washington Post", publishedDate: "12/12/17", headline: "New Year's Resolutions"})
 console.log(print.lookup("NBC", "12/5/18"))

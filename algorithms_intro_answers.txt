@@ -1,0 +1,42 @@
+1. Using proper pseudo-code, describe the following primitive algorithms:
+A: 
+<Washing Dishes>
+Class WashDishes
+  Constructor 
+    Set loadLevel to null 
+  
+  Function load 
+    While (load level < 100) 
+      Keep loading 
+      Loadlevel++
+    start Disher
+
+  Function unload
+    While (load level >= 0)
+      Keep unloading
+      Loadlevel--
+    
+ 
+2. As with the knot algorithm, there may be more than one way to solve the problem. It is essential to try to pick the best algorithm for a situation. Name three companies who created an algorithm that made them successful, e.g., Google's search algorithm. It doesn't need to be a tech example (such as a recipe or manufacturing a product). Google's algorithm produces more relevant results than other search engines; what about each of your cases make them stand out?
+
+A: 
+1) Netflix's movie recommendation algorithms 
+Netflix splits viewers up into more than two thousands taste groups, as well as the movie categories in order to provide best personalized recommendations of movies to individual members, making itself the #1 movie streaming service provider.  
+
+2) Uber's driver assignment algorithms 
+When ride requests are in, Uber uses their algorithms to assign the closest available driver, also making sure that the requests are spread across the drivers at the most affordable ride cost. 
+
+3) Google Maps algorithms
+Google uses many algorithms for its Maps service, including the ones to understand the query from users, draw maps, convert addresses to points on the maps, and it does it with high accuracy. Now many people rely on the map service for guided navigation. 
+
+3. Hypothesize about what constitutes an efficient algorithm versus an inefficient algorithm.
+A: There would be many different solutions/algorithms to solve computational problems. 
+But good algorithms should
+- produce the correct and accurate outputs; 
+- achieve the goal with fewer steps possible; and
+- be designed in a way that it is easily understood and modified for needs to solve additional problems. 
+
+
+
+
+

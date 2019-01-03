@@ -1,0 +1,63 @@
+####Exercise
+
+1. What is a binary tree and what makes it unique to other trees?
+A: A binary tree, as the name implies, can have up to 2 child nodes - a left and right node. The root node may have one, or two or zero child. The node that does not have child is called a leaf node. 
+
+2. What is a heuristic?
+A: Heuristics are educated guesses. It may solve a complex problem quickly but with compromised accuracy. 
+
+3. What is another problem besides the shortest-path problem that requires the use of heuristics?
+A: At LinkedIn, when a member starts to have 30 new connections from the same company during a window of about 30 days, the person is considered to changed a job in that company. This may not be a perfectly accurate statement, but emphrically it is the case in most instances.  
+
+4. What is the difference between a depth-first search and a breadth-first search?
+A: 
+Depth-first: goes deeper, looks for vertically, child's child first
+Breadth-first: goes wider, looks for horizontally, child's neighbors first
+
+5. Explain in your own words what an undirected, a-cyclic, unweighted graph is.
+A: 
+Undirected: Two-way. The connection is allowed in either direction.
+A-cyclic: Not a cycle, meaning it does not create a cycle. 
+Unweighted: All edges between two nodes are treated equally. No particular edge takes a priority or higher cost. 
+
+####Programming Questions 
+1. Given a Binary Search Tree and a value, write a function that checks to see whether the value exists within the tree.
+
+class Node{
+  constructor(data){
+    this.data = data
+    this.left = null
+    this.right = null 
+  }
+}
+
+class BinarySearchTree{
+  constructor(){
+    this.root = null
+  }
+  
+  insert(data){
+    var newNode = new Node(data)
+    this.root === null ? this.root = newNode : this.insertNode(this.root, newNode)
+  }
+  
+  insertNode(node, newNode){
+    if(newNode.data < node.data){
+      node.left === null ? node.left = newNode : this.insertNode(node.left, newNode) 
+    } else {
+        node.right === null ? node.right = newNode : this.insertNode(node.right, newNode)
+      }
+  }
+}
+
+var BST = new BinarySearchTree()
+console.log(BST.insert(15))
+// BST.insert(25); 
+// BST.insert(10); 
+// BST.insert(7); 
+// BST.insert(22); 
+// BST.insert(17); 
+// BST.insert(13); 
+// BST.insert(5); 
+// BST.insert(9); 
+// BST.insert(27); 

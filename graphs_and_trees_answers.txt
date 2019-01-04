@@ -83,4 +83,77 @@ BST.search(13) //prints true
 
 Example: The distance between the nodes 4 and 10 is 4. The distance between the nodes 8 and 10 is 1. The distance between the nodes 1 and 14 is 4.
 
-A: Can you give me a hint? 
+A: 
+class Node{
+  constructor(data){
+    this.data = data
+    this.left = null
+    this.right = null
+  }
+}
+
+class BinarySearchTree{
+  constructor(){
+    this.root = null
+  }
+  
+  insert(data){
+    var newNode = new Node(data)
+    this.root === null ? this.root = newNode : this.insertNode(this.root, newNode)
+  }
+  
+  insertNode(node, newNode){
+    if(newNode.data < node.data){
+      node.left === null ? node.left = newNode : this.insertNode(node.left, newNode)
+    } else {
+      node.right === null ? node.right = newNode : this.insertNode(node.right, newNode)
+    }
+  }
+  
+  search(data, path) {
+    this.searchNode(this.root, data, path)
+  }
+  
+  searchNode(node, data, path){
+    if(node !== null)
+      path.push(node.data)
+    if(node === null) 
+        console.log(false)
+    else if(data < node.data) 
+        return this.searchNode(node.left, data, path); 
+    else if(data > node.data) 
+        return this.searchNode(node.right, data, path); 
+    else
+        console.log(true) 
+  }   
+} 
+
+var BST = new BinarySearchTree()
+BST.insert(8)
+BST.insert(3)
+BST.insert(10)
+BST.insert(1)
+BST.insert(6)
+BST.insert(14)
+BST.insert(4)
+BST.insert(7)
+BST.insert(13)
+
+var path1=[]
+BST.search(14, path1)
+var path2=[]
+BST.search(13, path2)
+
+console.log(path1)
+console.log(path2)
+
+var lastMatchIndex = 0
+for (let i = 0; i < path1.length && i < path2.length; i++) {
+  if (path1[i] != path2[i])
+    break
+  lastMatchIndex = i
+}
+
+console.log(lastMatchIndex)
+var distance = path1.length-1-lastMatchIndex + path2.length-1-lastMatchIndex
+console.log(`distance: ${distance}`)

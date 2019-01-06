@@ -1,0 +1,60 @@
+1. Define and compare recursion and iteration.
+A: 
+Iteration: uses a loop to repeat the same process
+Recursion: function calls itself with the parameters 
+
+2. Name five algorithms that are commonly implemented by recursion.
+A: The height of the binary search tree, factorial, fibonacci, merge sort, binary search 
+
+3. When should you use recursion, and when should you avoid recursion? Give examples for each.
+A: When the recursive levels are too deep, it is better to avoid it, because the system would not be able to handle the call stacks. And also it is not easy for humans to understand either. 
+
+Also, you always need to be careful about the function going infinite. One way to prevent recursive from continuing forever is to set up the base case. If there is no base case, you must not use recursion. 
+
+4. Compare the recursive and iterative solutions to the three algorithms from the checkpoint (factorial, maximum, and fibonacci). What is similar, and what is different?
+A: Both approaches are valid ways to solve the same problem. 
+However, recursive functions tend to be simpler than iterative ones. Recursion is not necessarily more performant or memory efficient than iterative. 
+
+5. Given a multi-dimensional collection (such as an array) where the number of dimensions is unknown, write a recursive algorithm to count the number of items in the entire collection.
+
+var collection = [6, 8, [10, [50, ["a", "b"], 8, 6]], 100] // # of elements: 9
+
+function countElement(col){
+  let count = 0
+  for(let i = 0; i < col.length; i++){
+    if(typeof(col[i]) !== "object"){
+      count++
+    } else {
+      count += countElement(col[i])
+    }
+  }
+  return count
+} 
+
+console.log(countElement(collection)) // prints 9
+
+6. A palindrome is a word or phrase whose spelling is the same either direction (e.g., racecar). Write a recursive algorithm to determine if a given word or phrase is a palindrome.
+
+var string1 = "racecar" //prints "yes, a palindrome"
+var string2 = "abddba"  //prints "yes, a palindrome"
+var string3 = "racebar" //"no, not a palindrome"
+
+let toArray = string3.split('')
+
+function isPalindrome(toArray){
+  if(toArray.length == 0 || toArray.length == 1){
+    return "yes, a palindrome"
+  } else if (toArray[0] == toArray[toArray.length-1]){
+    toArray.shift()
+    toArray.pop()
+    return isPalindrome(toArray) 
+  } else {
+    return "no, not a palindrome"
+  } 
+}
+
+console.log(isPalindrome(toArray))
+
+7. Google Easter Egg: Google the term "recursion". Google will prompt you with "Did you mean: recursion". Explain why this behavior exhibits properties of recursion.
+A: This is a joke to show the nature of the recursion, which keeps calling itself. 
+

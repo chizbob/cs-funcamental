@@ -1,0 +1,45 @@
+####Exercise
+1. Write pseudocode for bubble sort.
+FUNCTION bubbleSort(array)
+ FOR i = 0 to collection.length 
+   swapped = false
+   FOR j = 0 to collection.length 
+     IF array[j] > array[i] THEN
+       swap list[j], list[j+1]
+       swapped = true
+   IF (not swapped) THEN
+    break
+  RETURN array
+
+2. Write pseudocode for quicksort.
+
+FUNCTION quickSort(array){
+  IF(array.length <= 1)
+    RETURN  //don't need sorting
+  
+  SET pivotPoint TO last element of the array
+ 
+  cut the array in halves at pivotPoint  
+    left array: elements <= pivotPoint
+    right array: elements > pivotPoint 
+    sort left array
+    sort right array
+    concatenate: left array + pivot + right array
+}
+
+3. We talked about time complexity in a previous checkpoint, and how to get an idea of the efficiency of an algorithm. After looking at the pseudocode for the above sorting methods, identify why merge sort and quick sort are much more efficient than the others. Walking through each algorithm with a few sample collections may help.
+A: 
+		Best		Average		Worst	
+Quicksort	Ω(n log(n))	Θ(n log(n))	O(n^2)	
+Mergesort	Ω(n log(n))	Θ(n log(n))	O(n log(n))	
+Bubble Sort	Ω(n)		Θ(n^2)		O(n^2)	
+Insertion Sort	Ω(n)		Θ(n^2)		O(n^2)	
+Selection Sort	Ω(n^2)		Θ(n^2)		O(n^2)	
+
+The main reason merge sort and quick sort are efficient than others is that the others' time complexity on average cases is 0(n^2) - a for loop inside a for loop. 
+But the merge and quick sorts are 0(n log(n)). 
+
+4. All of the sorts addressed in this checkpoint are known as comparison sorts. Research bucket sort and explain how it works. What is the ideal input for bucket sort?
+A: 
+Bucket sort: Bucket sort is useful when inputs are uniformly distributed over a range. 
+Suppose there are "buckets" that correspond each of the sub-ranges in a range. Total number of elements are 10, then create 10 buckets. And those buckets are individually sorted at the end. 

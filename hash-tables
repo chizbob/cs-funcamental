@@ -29,25 +29,28 @@ A: The key here is whether the data can be associated based on a certain categor
 class CustomerDB{
   constructor(){
     this.db = []
+    this.k = 10
   }
 
-  hash(phone){
-    let result = 0
-       for(let i=0; i<phone.length; i++){
-         result += phone.charCodeAt(i)
+  hash(key){
+    let hashCode = 0
+    let trueIndex = null
+       for(let i=0; i<key.length; i++){
+         hashCode += key.charCodeAt(i)
        }
-    return result % this.db.length
+    trueIndex = hashCode % this.k 
+    return trueIndex
   }
   
   addCustomer(info){
-      let index = this.hash(info.phone)
-      this.db[index] === undefined ? this.db[index] = [info] :  this.db[index].push(info)
-      return this.db
+    let trueIndex = this.hash(info.phone)
+    this.db[trueIndex] === undefined ? this.db[trueIndex] = info :  this.db[trueIndex].push(info)
+    return this.db
   }
   
   lookup(customer){
-    let index = this.hash(customer.phone)
-    return this.db[index].filter(a => a.name === customer.name)
+    let trueIndex = this.hash(customer.phone)
+    return this.db[trueIndex]
   } 
 }
 
@@ -55,15 +58,11 @@ let print = new CustomerDB()
 
 console.log(print.addCustomer({name: "St.Bae", phone:"9876543", address: "1 dog lane"}))
 console.log(print.addCustomer({name: "Soo", phone: "1234567", address: "2 cat way"}))
-console.log(print.addCustomer({name: "Yubin", phone: "4297654", address: "3 Pineapple dr"}))
-console.log(print.addCustomer({name: "Chung", phone: "5768790", address: "55 circle cir."}))
+// console.log(print.addCustomer({name: "Yubin", phone: "4297654", address: "3 Pineapple dr"}))
+// console.log(print.addCustomer({name: "Chung", phone: "5768790", address: "55 circle cir."}))
 console.log(print.lookup({
   name: "Soo",
   phone: "1234567"
-}))
-console.log(print.lookup({
-  name: "Won",
-  phone: "2435467"
 }))
 
 7. Build a system that allows a store owner to track their store's inventory using a hash table for storage.
@@ -71,33 +70,36 @@ console.log(print.lookup({
 class Inventory{
   constructor(){
     this.db = []
+    this.k = 5
   }
 
   hash(productName){
-    let result = 0
+    let hashCode = 0
+    let trueIndex = null
        for(let i=0; i<productName.length; i++){
-         result += productName.charCodeAt(i)
+         hashCode += productName.charCodeAt(i)
        }
-    return result % 100
+    trueIndex = hashCode % this.k
+    return trueIndex
   }
 
   addInventory(info){
-      let index = this.hash(info.productName)
-      this.db[index] === undefined ? this.db[index] = [info] : this.db[index].push(info)
-      //console.log(this.db[index])
+      let trueIndex = this.hash(info.productName)
+      this.db[trueIndex] === undefined ? this.db[trueIndex] = [info] : this.db[trueIndex].push(info)
+      console.log(this.db)
   }
 
   lookup(productName){
-    let index = this.hash(productName)
-    return this.db[index].filter(a => a.productName === productName)
+    let trueIndex = this.hash(productName)
+    return this.db[trueIndex].filter(a => a.productName === productName)
   } 
 }
 
 let print = new Inventory()
 
 print.addInventory({productName: "Shampoo", manufacturer: "Soft.Inc", quantity: 50})
-// print.addInventory({productName: "Conditioner", manufacturer: "Soft.Inc", quantity: 30})
-// print.addInventory({productName: "Makeup Set", manufacturer: "Beutify & Co.", quantity: 10})
+print.addInventory({productName: "Conditioner", manufacturer: "Soft.Inc", quantity: 30})
+print.addInventory({productName: "Makeup Set", manufacturer: "Beutify & Co.", quantity: 10})
 console.log(print.lookup("Shampoo"))
 
 8. Build a system that allows digital copies of newspapers to be entered and searched by publisher and publication date. Use hash tables to store the necessary data.
@@ -105,14 +107,17 @@ console.log(print.lookup("Shampoo"))
 class DigitalNews{
   constructor(){
     this.db = []
+    this.k = 5
   }
 
   hash(publisher){
     let result = 0
+    let index = null
        for(let i=0; i<publisher.length; i++){
          result += publisher.charCodeAt(i)
        }
-    return result % 100
+    result % this.k
+    return index
   }
   
   addNews(newsInfo){

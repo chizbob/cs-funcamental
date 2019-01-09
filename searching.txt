@@ -36,35 +36,42 @@ A: Binary search, because in the worst case the iterations can go up to a millio
 1. You and a friend have set a wager to see who can find the word "Albatross" in the dictionary the fastest. Write a program to allow you to win the bet.
 A: Since the dictionary is a sorted collection, the binary search would be better.
 
+
 function binaryLookup(dictionary, word){
     let low = 0
     let high = dictionary.length
-    while(low <= high){
+    while(low < high){
         let mid = Math.floor((low + high) / 2)
-        if(mid > word){
+        if(dictionary[mid] > word){
           high = mid - 1
-        } else if (mid < word){
+        } else if (dictionary[mid] < word){
           low = mid + 1
         } else {
           return mid
         }
     }
+  return "not in this dictionary"
 }
 
-console.log(binaryLookup(oxfordStd, "albatross"))
+let dictionary = ["albatross", "butterfly", "canary", "duck", "robin"]
+console.log(binaryLookup(dictionary, "albatross"))
 
 2. You work at a pet store, and a child has asked you to net the only white-spotted goldfish from the fish tank. Write a program that will help you net the right fish.
 A: Since the tank is not a sorted collection, it should be by the linear search.
 
-function findFish(tank, fish){
+function pickRight(tank, fish){
   let result = null, value
   for(let i=0; i<tank.length; i++){
     value = tank[i]
-    if(value === fish){
-      result = i
-      break
-    }
+  if(value === fish){
+    result = i
+    return result
   }
-  return result
+  }
+  return "not in this tank"
 }
 
+let myTank = ["red", "orange", "gold", "white-spotted", "black", "transparent"]
+let myFish = "white-spotted"
+
+console.log(pickRight(myTank, myFish))

@@ -7,8 +7,11 @@ FUNCTION bubbleSort(array)
      IF array[j] > array[i] THEN
        swap list[j], list[j+1]
        swapped = true
+     End IF
+   End FOR
    IF (not swapped) THEN
     break
+   END IF
   RETURN array
 
 2. Write pseudocode for quicksort.
@@ -16,6 +19,7 @@ FUNCTION bubbleSort(array)
 FUNCTION quickSort(array){
   IF(array.length <= 1)
     RETURN  //don't need sorting
+  END IF
   
   SET pivotPoint TO last element of the array
  

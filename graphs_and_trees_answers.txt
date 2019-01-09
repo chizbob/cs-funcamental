@@ -84,76 +84,89 @@ BST.search(13) //prints true
 Example: The distance between the nodes 4 and 10 is 4. The distance between the nodes 8 and 10 is 1. The distance between the nodes 1 and 14 is 4.
 
 A: 
-class Node{
-  constructor(data){
-    this.data = data
+class Node {
+  constructor(value) {
+    this.value = value
     this.left = null
     this.right = null
   }
 }
 
-class BinarySearchTree{
-  constructor(){
+class BinarySearchTree {
+  constructor() {
     this.root = null
   }
-  
-  insert(data){
-    var newNode = new Node(data)
-    this.root === null ? this.root = newNode : this.insertNode(this.root, newNode)
+
+  createNode(data) {
+    let newNode = new Node(data)
+    if (this.root === null) {
+      this.root = newNode
+    } else {
+      this.insertNode(this.root, newNode)
+    }
   }
-  
-  insertNode(node, newNode){
-    if(newNode.data < node.data){
+
+  insertNode(node, newNode) {
+    if (newNode.value < node.value) {
       node.left === null ? node.left = newNode : this.insertNode(node.left, newNode)
     } else {
       node.right === null ? node.right = newNode : this.insertNode(node.right, newNode)
+      }
+  }
+
+  findStart(node, startNode, count) {
+    let saveNode, saveCount
+    while (node !== startNode.value) {
+      while (node > startNode.value) {
+        startNode = startNode.right
+        count++
+      }
+      while (node < startNode.value) {
+        startNode = startNode.left
+        count++
+      }
+    }
+    if (node === startNode.value) {
+      saveNode = startNode
+      saveCount = count
+    }
+    return { 
+      node: saveNode, 
+      count: saveCount 
     }
   }
-  
-  search(data, path) {
-    this.searchNode(this.root, data, path)
+
+  getDistance(node1, node2){
+    let finalCount
+    let start = this.findStart(node1, this.root, 0)
+    let firstNode = start.node
+    let startCount = start.count
+    if(node2 === this.root.value){
+      return startCount
+    } else if(node1 === this.root.value){
+      let first = this.findStart(node2, this.root, 0)
+      return first.count
+    } else if(node2 > this.root.value && node1 < this.root.value || node2 < this.root.value && node1 > this.root.value){
+      let end = this.findStart(node2, this.root, startCount)
+      return end.count
+    } else if(node2 < this.root.value && node1 < this.root.value || node2 > this.root.value && node1 > this.root.value){
+      let last = this.findStart(node2, firstNode, 0)
+      return last.count
+    }
   }
-  
-  searchNode(node, data, path){
-    if(node !== null)
-      path.push(node.data)
-    if(node === null) 
-        console.log(false)
-    else if(data < node.data) 
-        return this.searchNode(node.left, data, path); 
-    else if(data > node.data) 
-        return this.searchNode(node.right, data, path); 
-    else
-        console.log(true) 
-  }   
-} 
 
-var BST = new BinarySearchTree()
-BST.insert(8)
-BST.insert(3)
-BST.insert(10)
-BST.insert(1)
-BST.insert(6)
-BST.insert(14)
-BST.insert(4)
-BST.insert(7)
-BST.insert(13)
-
-var path1=[]
-BST.search(14, path1)
-var path2=[]
-BST.search(13, path2)
-
-console.log(path1)
-console.log(path2)
-
-var lastMatchIndex = 0
-for (let i = 0; i < path1.length && i < path2.length; i++) {
-  if (path1[i] != path2[i])
-    break
-  lastMatchIndex = i
 }
 
-console.log(lastMatchIndex)
-var distance = path1.length-1-lastMatchIndex + path2.length-1-lastMatchIndex
-console.log(`distance: ${distance}`)
+let BST = new BinarySearchTree();
+
+BST.createNode(8)
+BST.createNode(3)
+BST.createNode(10)
+BST.createNode(1)
+BST.createNode(6)
+BST.createNode(14)
+BST.createNode(4)
+BST.createNode(7)
+BST.createNode(13)
+
+console.log(BST.getDistance(6, 13))

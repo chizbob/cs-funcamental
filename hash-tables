@@ -70,69 +70,38 @@ console.log(print.lookup({
 class Inventory{
   constructor(){
     this.db = []
-    this.k = 5
+    this.k = 4
   }
-
-  hash(productName){
+  
+  hash(string){
     let hashCode = 0
-    let trueIndex = null
-       for(let i=0; i<productName.length; i++){
-         hashCode += productName.charCodeAt(i)
-       }
-    trueIndex = hashCode % this.k
-    return trueIndex
+    for(let i = 0; i < string.length; i++){
+      hashCode += string.charCodeAt(i)
+    }
+    return hashCode % this.k
   }
 
-  addInventory(info){
-      let trueIndex = this.hash(info.productName)
-      this.db[trueIndex] === undefined ? this.db[trueIndex] = [info] : this.db[trueIndex].push(info)
-      console.log(this.db)
+  add(info){
+    let index = this.hash(info.productName)
+    !this.db[index] ? this.db[index] = info : this.db[index].push(info)
   }
 
-  lookup(productName){
-    let trueIndex = this.hash(productName)
-    return this.db[trueIndex].filter(a => a.productName === productName)
-  } 
+  lookup(info){
+    let index = this.hash(info.productName)
+    return this.db[index]
+  }
 }
 
 let print = new Inventory()
 
-print.addInventory({productName: "Shampoo", manufacturer: "Soft.Inc", quantity: 50})
-print.addInventory({productName: "Conditioner", manufacturer: "Soft.Inc", quantity: 30})
-print.addInventory({productName: "Makeup Set", manufacturer: "Beutify & Co.", quantity: 10})
-console.log(print.lookup("Shampoo"))
+print.add({productName: "Shampoo", manufacturer: "Soft.Inc", quantity: 50});
+print.add({productName: "Conditioner", manufacturer: "Soft.Inc", quantity: 30});
+print.add({productName: "Makeup Set", manufacturer: "Beutify & Co.", quantity: 10});
+print.add({productName: "Coffee maker", manufacturer: "The Beans", quantity: 10});
+print.add({productName: "Chair", manufacturer: "Chairman", quantity: 10});
+
+console.log(print.lookup({productName: "Shampoo"}));
+console.log(print.lookup({productName: "Conditioner"}))
+console.log(print.lookup({productName: "momo"}));
 
 8. Build a system that allows digital copies of newspapers to be entered and searched by publisher and publication date. Use hash tables to store the necessary data.
-
-class DigitalNews{
-  constructor(){
-    this.db = []
-    this.k = 5
-  }
-
-  hash(publisher){
-    let result = 0
-    let index = null
-       for(let i=0; i<publisher.length; i++){
-         result += publisher.charCodeAt(i)
-       }
-    result % this.k
-    return index
-  }
-  
-  addNews(newsInfo){
-      let index = this.hash(newsInfo.publisher)
-      this.db[index] === undefined ? this.db[index] = [newsInfo] : this.db[index].push(newsInfo)
-  }
-  
-  lookup(publisher, publishedDate){
-    let index = this.hash(publisher)
-    return this.db[index].filter(a => a.publishedDate === publishedDate)
-  } 
-}
-
-let print = new DigitalNews()
-
-print.addNews({publisher: "NBC", publishedDate: "12/5/18", headline: "Christmas is Coming"})
-print.addNews({publisher: "Washington Post", publishedDate: "12/12/17", headline: "New Year's Resolutions"})
-console.log(print.lookup("NBC", "12/5/18"))

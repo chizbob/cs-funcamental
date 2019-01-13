@@ -70,20 +70,27 @@ console.log(print.lookup({
 class Inventory{
   constructor(){
     this.db = []
-    this.k = 4
+    this.k = 100
   }
   
-  hash(string){
+  hash(product){
     let hashCode = 0
-    for(let i = 0; i < string.length; i++){
-      hashCode += string.charCodeAt(i)
+    for(let i = 0; i < product.length; i++){
+      hashCode += product.charCodeAt(i)
     }
     return hashCode % this.k
   }
 
   add(info){
     let index = this.hash(info.productName)
-    !this.db[index] ? this.db[index] = info : this.db[index].push(info)
+    if(!this.db[index]){
+      this.db[index] = info
+    } else {
+      while(this.db[index]){
+        index++
+      }
+      this.db[index] = info
+    }
   }
 
   lookup(info){
@@ -100,8 +107,49 @@ print.add({productName: "Makeup Set", manufacturer: "Beutify & Co.", quantity: 1
 print.add({productName: "Coffee maker", manufacturer: "The Beans", quantity: 10});
 print.add({productName: "Chair", manufacturer: "Chairman", quantity: 10});
 
-console.log(print.lookup({productName: "Shampoo"}));
+console.log(print.lookup({productName: "Shampoo"}))
 console.log(print.lookup({productName: "Conditioner"}))
-console.log(print.lookup({productName: "momo"}));
+console.log(print.lookup({productName: "momo"}))
 
 8. Build a system that allows digital copies of newspapers to be entered and searched by publisher and publication date. Use hash tables to store the necessary data.
+
+class DigitalNews{
+  constructor(){
+    this.db = []
+    this.k = 100
+  }
+
+  hash(publisher){
+    let hashCode = null
+       for(let i=0; i<publisher.length; i++){
+         hashCode += publisher.charCodeAt(i)
+       }
+    return hashCode % this.k
+  }
+  
+  addNews(newsInfo){
+    let index = this.hash(newsInfo.publisher)
+    if(!this.db[index]){
+      this.db[index] = newsInfo
+    } else {
+      while(this.db[index]){
+        index++
+      }
+      this.db[index] = newsInfo
+    }
+  }
+
+  lookup(publisher, publishedDate){
+    let index = this.hash(publisher)
+    return this.db[index]
+  } 
+}
+
+let print = new DigitalNews()
+
+print.addNews({publisher: "NBC", publishedDate: "12/5/18", headline: "Christmas is Coming"})
+print.addNews({publisher: "Washington Post", publishedDate: "12/12/17", headline: "New Year's Resolutions"})
+print.addNews({publisher: "NYT", publishedDate: "12/12/16", headline: "Best places to eat"})
+console.log(print.lookup("NBC", "12/5/18"))
+console.log(print.lookup("ABC", "12/5/18"))
+

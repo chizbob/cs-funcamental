@@ -142,8 +142,8 @@ class DigitalNews{
     return index
   }
 
-  lookup(publisher, publishedDate){
-    let index = this.hash(publisher, publishedDate)
+  lookup(newsInfo){
+    let index = this.hash(newsInfo.publisher, newsInfo.publishedDate)
     return !this.db[index] ? "no news found" : this.db[index]
   } 
 }
@@ -153,5 +153,5 @@ let print = new DigitalNews()
 print.addNews({publisher: "NBC", publishedDate: "12/5/18", headline: "Christmas is Coming"})
 print.addNews({publisher: "Washington Post", publishedDate: "12/12/17", headline: "New Year's Resolutions"})
 print.addNews({publisher: "NYT", publishedDate: "12/12/16", headline: "Best places to eat"})
-console.log(print.lookup("NBC", "12/5/18"))
-console.log(print.lookup("ABC", "12/5/18"))
+console.log(print.lookup({publisher: "NBC", publishedDate: "12/5/18", headline: "Christmas is Coming"}))
+console.log(print.lookup({publisher: "ABC", publishedDate: "12/5/18", headline: "January"}))
